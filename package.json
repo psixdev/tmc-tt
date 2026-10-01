@@ -1,0 +1,31 @@
+{
+  "name": "tmc-tt",
+  "version": "0.0.1",
+  "description": "",
+  "author": "psixdev",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "morgan": "^1.12.1",
+    "nodemon": "^3.1.14",
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^10.0.0",
+    "process": "^0.11.10",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "styled-components": "^6.1.19",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  }
+}

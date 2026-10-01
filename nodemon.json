@@ -1,0 +1,11 @@
+{
+	"ignoreRoot": [
+		".git",
+		"node_modules",
+		"static",
+		"client"
+	],
+	"ignore": [],
+	"ext": "js,pug",
+	"watch": "./"
+}
