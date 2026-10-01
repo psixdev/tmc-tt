@@ -46,17 +46,22 @@ function toggleItem(id) {
 }
 
 function moveItem(id, position) {
-	// const index = items.findIndex((item) => item.id === id);
+	const selected = itemsMap.get(id);
+	const currentItems = selected ? selectedItems : items;
 
-	// const item = items[index];
-	// items.splice(index, 1);
-	// items.splice(position, 0, item);
+	const index = currentItems.findIndex((item) => item.id === id);
+
+	const item = currentItems[index];
+	currentItems.splice(index, 1);
+	currentItems.splice(position, 0, item);
 }
 
-// for (let i = 1; i <= 1e6; i++) {
-for (let i = 1; i <= 100; i++) {
-	addItem(i);
+for (let i = 1; i <= 1e6; i++) {
+// for (let i = 1; i <= 100; i++) {
+	items.push({ id: i });
+	itemsMap.set(i, false);
 }
+items.reverse();
 
 // toggleItem(63);
 // moveItem(62, 17);
@@ -132,14 +137,19 @@ async function init() {
 	});
 
 	router.post('/api/1.0/items/:id/order', (req, res) => {
-		const id = Number(req.query.id);
+		const id = Number(req.params.id);
 		const position = Number(req.body.position);
 
 		if (!isValidId(id)) {
 			return res.status(400).json({ message: 'invalid id', userMessage: 'невалидный id' });
 		}
 
+		// validate position
+
+		return res.status(500).json({ message: 'invalid id', userMessage: 'невалидный id' });
+
 		moveItem(id, position);
+
 
 		res.status(204).send();
 	});

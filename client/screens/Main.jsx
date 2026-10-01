@@ -72,7 +72,7 @@ function Main() {
 
 		setIsSubmitting(true);
 
-		fetch(`/api/1.0/items`, {
+		fetch('/api/1.0/items', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -113,14 +113,15 @@ function Main() {
 			});
 	}, []);
 
-	console.log(idTouched, isIdValid(id));
-
 	return (
 		<Page>
 			<Containers>
 				<Container>
 					<Title>Все элементы</Title>
-					<List {...listProps} onToggleItem={handleToggleItem} />
+					<List
+						{...listProps}
+						onToggleItem={handleToggleItem}
+					/>
 					<CreateForm onSubmit={handleSubmit}>
 						<InputContainer>
 							<Input
@@ -145,7 +146,11 @@ function Main() {
 				</Container>
 				<Container>
 					<Title>Выбранные</Title>
-					<List {...selectedListProps} onToggleItem={handleToggleItem} selected />
+					<List
+						{...selectedListProps}
+						onToggleItem={handleToggleItem}
+						selected
+					/>
 				</Container>
 			</Containers>
 		</Page>

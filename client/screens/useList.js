@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { move } from '@dnd-kit/helpers';
 
 const LIMIT = 20;
 
@@ -56,7 +57,34 @@ function useList({ selected }) {
 		})
 	}, []);
 
-	return { items, loading, hasMore, loadMore, addItem, removeItem };
+	const moveItem = useCallback((fromIndex, toIndex) => {
+		const item = items[fromIndex];
+
+		fetch(`/api/1.0/items/${item.id}/order`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify({ position: toIndex })
+		})
+			.then((res) => {
+				if (!res.ok) {
+					setItems((prev) => [...prev]); // ?
+					return;
+				}
+
+				setItems((prev) => {
+					const items = [...prev];
+
+					items.splice(fromIndex, 1);
+					items.splice(toIndex, 0, item);
+
+					return items;
+				});
+			});
+	}, [items])
+
+	return { items, loading, hasMore, loadMore, addItem, removeItem, moveItem };
 }
 
 export default useList;
